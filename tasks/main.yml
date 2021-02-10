@@ -1,0 +1,19 @@
+---
+
+- name: Add SAP repo's apt key (old)
+  apt_key:
+    url: https://dist.sapmachine.io/debian/sapmachine.old.key
+    state: present
+- name: Add SAP repo's apt key
+  apt_key:
+    url: https://dist.sapmachine.io/debian/sapmachine.key
+    state: present
+- name: Add SAP apt repository
+  apt_repository:
+    repo: deb http://dist.sapmachine.io/debian/amd64/ ./
+    state: present
+- name: Install SAP Machine OpenJDK
+  apt:
+    pkg: "{{ sap_machine_package }}"
+    state: present
+    update_cache: yes
